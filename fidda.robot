@@ -69,7 +69,6 @@ Login
 Створити об'єкт МП
     [Arguments]    ${username}    ${tender_data}
     Log    ${tender_data}
-    Set Global Variable    ${TENDER_INIT_DATA_LIST}    ${tender_data}
 
     ${title}=    Get From Dictionary    ${tender_data.data}    title
     ${title_ru}=    Get From Dictionary    ${tender_data.data}    title_ru
@@ -544,13 +543,6 @@ Login
     [Arguments]    ${username}    ${tender_uaid}    ${item}
     Run keyword    fidda.Додати предмет    ${item}
 
-Отримати документ
-    [Arguments]    ${username}    ${tender_uaid}    ${doc_id}
-    ${file_name}    Get Element Attribute    xpath=//a[contains(text(),'${doc_id}')]@name
-    ${url}    Get Element Attribute    xpath=//a[contains(text(),'${doc_id}')]@href
-    download_file    ${url}    ${file_name}    ${OUTPUT_DIR}
-    [Return]    ${file_name}
-
 Додати умови проведення аукціону
   [Arguments]  ${username}  ${auction}  ${index}  ${tender_uaid}
   Run KeyWord  fidda.Додати умови проведення аукціону номер ${index}  ${username}  ${tender_uaid}  ${auction}
@@ -569,8 +561,6 @@ Login
   Input Text    id=lotauctions-minimalstep_amount    ${minimalStep}
   ${guarantee_amount}=    Convert To String    ${auction.guarantee.amount}
   Input Text    id=lotauctions-guarantee_amount    ${guarantee_amount}
-  # ${registrationFee}=  Convert To String    ${auction.registrationFee.amount}
-  # Input Text    id=lotauctions-registrationfee_amount    ${registrationFee}
 
   Input text    id=lotauctions-bankaccount_description    ${auction.bankAccount.bankName}
   Input text    id=lotauctions-bankaccount_bankname    ${auction.bankAccount.description}
