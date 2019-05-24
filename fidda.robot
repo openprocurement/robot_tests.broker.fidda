@@ -884,6 +884,7 @@ Login
 
 Отримати значення поля items[${index}].quantity тендеру
     ${return_value}=    Отримати текст    id=items[${index}].quantity
+    ${return_value}=    Convert to number    ${return_value}
     [Return]    ${return_value}
 
 Отримати значення поля items[${index}].description тендеру
