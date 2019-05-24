@@ -218,6 +218,10 @@ Login
     ${return_value}=    Отримати текст    id=assetID
     [Return]    ${return_value}
 
+Отримати інформацію про assetID
+    ${return_value}=    Отримати текст    id=assetID
+    [Return]    ${return_value}
+
 Отримати інформацію з активу в договорі
     [Arguments]    ${username}    ${contract_uaid}    ${item_id}    ${field_name}
     ${return_value}=    Run Keyword    fidda.Отримати інформацію з активу ${item_id} контракту про ${field_name}
@@ -542,6 +546,13 @@ Login
 Додати актив до об'єкта МП
     [Arguments]    ${username}    ${tender_uaid}    ${item}
     Run keyword    fidda.Додати предмет    ${item}
+
+Отримати документ
+    [Arguments]    ${username}    ${tender_uaid}    ${doc_id}
+    ${file_name}    Get Element Attribute    xpath=//a[contains(text(),'${doc_id}')]@name
+    ${url}    Get Element Attribute    xpath=//a[contains(text(),'${doc_id}')]@href
+    download_file    ${url}    ${file_name}    ${OUTPUT_DIR}
+    [Return]    ${file_name}
 
 Додати умови проведення аукціону
   [Arguments]  ${username}  ${auction}  ${index}  ${tender_uaid}
@@ -873,6 +884,7 @@ Login
 
 Отримати значення поля items[${index}].quantity тендеру
     ${return_value}=    Отримати текст    id=items[${index}].quantity
+    ${return_value}=    Convert to number    ${return_value}
     [Return]    ${return_value}
 
 Отримати значення поля items[${index}].description тендеру
