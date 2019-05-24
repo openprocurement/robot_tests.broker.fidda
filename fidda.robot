@@ -218,6 +218,10 @@ Login
     ${return_value}=    Отримати текст    id=assetID
     [Return]    ${return_value}
 
+Отримати інформацію про assetID
+    ${return_value}=    Отримати текст    id=assetID
+    [Return]    ${return_value}
+
 Отримати інформацію з активу в договорі
     [Arguments]    ${username}    ${contract_uaid}    ${item_id}    ${field_name}
     ${return_value}=    Run Keyword    fidda.Отримати інформацію з активу ${item_id} контракту про ${field_name}
